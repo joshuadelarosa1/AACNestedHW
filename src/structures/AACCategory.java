@@ -51,11 +51,11 @@ public class AACCategory<K, V> {
   }
 
   public String getCategory() {
-    return ""; // STUB
+    return "food"; // STUB
   }
 
   public String getText(String imageLoc) {
-    return ""; // STUB
+    return "television"; // STUB
   }
 
   public boolean hasImage(String imageLoc) {
