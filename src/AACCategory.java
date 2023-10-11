@@ -1,8 +1,6 @@
-package structures;
-
 import java.lang.String;
 
-public class AACCategory<K, V> {
+public class AACCategory {
 
   // +-----------+---------------------------------------------------
   // | Constants |
@@ -31,14 +29,12 @@ public class AACCategory<K, V> {
   /**
    * The array of key/value pairs.
    */
-  KVPair<K, V> pairs[];
 
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
   public AACCategory(String name) {
-    this.name = name;
     // STUB
   }
 
@@ -51,11 +47,11 @@ public class AACCategory<K, V> {
   }
 
   public String getCategory() {
-    return "food"; // STUB
+    return ""; // STUB
   }
 
   public String getText(String imageLoc) {
-    return "television"; // STUB
+    return ""; // STUB
   }
 
   public boolean hasImage(String imageLoc) {
