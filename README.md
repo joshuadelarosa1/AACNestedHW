@@ -6,4 +6,8 @@ end of an interface that allows for speaking with text to speech.
 Acknowledgments:
 Sam R code examples given in class
 Catie's Starter code
-My old mini project 4
+My mini project 4
+All descriptions and methods addapted from:
+https://accessibilityeducation.github.io/assignments/AAC/AACCategory.html#getCategory()
+https://accessibilityeducation.github.io/assignments/AAC/AACMappings.html
+

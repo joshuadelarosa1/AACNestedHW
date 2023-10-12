@@ -3,20 +3,12 @@ import structures.AssociativeArray;
 
 public class AACCategory {
 
-  // +-----------+---------------------------------------------------
-  // | Constants |
-  // +-----------+
-
-  /**
-   * The default capacity of the initial array.
-   */
-
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
 
   /**
-   * The associative array
+   * The associative array of catgeories and associative arrays
    */
   AssociativeArray<String, String> AA;
 
@@ -78,10 +70,14 @@ public class AACCategory {
     return this.AA.hasKey(imageLoc);
   } // hasImage(String imageLoc)
 
+  /*
+   * Returns an array of all image locations
+   */
   public String[] getImages() {
-    String result[] = new String[16];
-    return result;
-    // STUB
-  }
+    String result[];
+    result = this.AA.keys();
 
-}
+    return result;
+  } // getImages()
+
+} // class AACCategory
