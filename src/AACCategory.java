@@ -1,4 +1,5 @@
 import java.lang.String;
+import structures.AssociativeArray;
 
 public class AACCategory {
 
@@ -10,57 +11,77 @@ public class AACCategory {
    * The default capacity of the initial array.
    */
 
-  static final int DEFAULT_CAPACITY = 16;
-
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
 
-  /*
-   * The size of the associative array
+  /**
+   * The associative array
    */
-  int size;
+  AssociativeArray<String, String> AA;
 
   /*
-   * The name of the associative array
+   * The name of the category
    */
   String name;
-
-  /**
-   * The array of key/value pairs.
-   */
 
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
-  public AACCategory(String name) {
-    // STUB
-  }
+  /*
+   * Creates a new empty category with the given name
+   */
+  public AACCategory(String name, AssociativeArray<String, String> AA) {
+    this.AA = AA;
+    this.name = name;
+  } // AACAtegory(String, AssociativeArray<String, String>)
 
   // +------------------+--------------------------------------------
   // | Standard Methods |
   // +------------------+
 
+  /*
+   * Adds the mapping of the imageLoc to the text to the category
+   */
   public void addItem(String imageLoc, String text) {
-    // STUB
-  }
+    this.AA.set(imageLoc, text);
+  } // addItem(String, String)
 
+  /*
+   * Returns the name of the category
+   */
   public String getCategory() {
-    return ""; // STUB
-  }
 
-  public String getText(String imageLoc) {
-    return ""; // STUB
-  }
+    return "";
+  } // getCategory()
 
+  /*
+   * Returns the text associated with the given image loc in this category
+   */
+  public String getText(String imageLoc) throws Exception {
+    String result;
+
+    try {
+      result = this.AA.get(imageLoc);
+    } catch (Exception e) {
+      throw new Exception("This value was not found. Please try again.");
+    }
+
+    return result;
+  } // getText(String imageLoc)
+
+  /*
+   * Determines if the provided images is stored in the category
+   */
   public boolean hasImage(String imageLoc) {
-    return true; // STUB
-  }
+    return this.AA.hasKey(imageLoc);
+  } // hasImage(String imageLoc)
 
   public String[] getImages() {
-    String result[] = new String[DEFAULT_CAPACITY];
-    return result; // STUB
+    String result[] = new String[16];
+    return result;
+    // STUB
   }
 
 }

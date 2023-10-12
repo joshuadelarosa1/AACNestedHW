@@ -5,7 +5,7 @@ public class AACMappings {
   }
 
   public String getText(String actionCommand) {
-    return "television"; // STUB
+    return "Alma farted earlier and it stunk so bad. Please help me."; // STUB
   }
 
   public String[] getImageLocs() {
