@@ -1,6 +1,7 @@
 package structures;
 
 import static java.lang.reflect.Array.newInstance;
+import java.lang.reflect.Array;
 import java.security.Key;
 
 /**
@@ -192,14 +193,14 @@ public class AssociativeArray<K, V> {
    
   @SuppressWarnings({"unchecked"})
   public K[] keys() {
-    K allKs[] = (K[]) newInstance(((new KVPair<K, V>()).key).getClass(), DEFAULT_CAPACITY);
     int j = 0;
+    K allKs[] = (K[]) newInstance(((this.pairs[0]).key).getClass(), this.pairs.length);  
 
-    for (int i = 0; i < this.pairs.length; i++) {
-      if (this.pairs[i] == null || this.pairs[i].key == null || this.pairs[i].value == null) {
+    for (int k = 0; k < this.pairs.length; k++) {
+      if (this.pairs[k] == null || this.pairs[k].key == null || this.pairs[k].value == null) {
         continue;
       } else {
-        allKs[j] = this.pairs[i].key;
+        allKs[j] = this.pairs[k].key;
         j++;
       }
     }
@@ -207,21 +208,25 @@ public class AssociativeArray<K, V> {
     return allKs;
   } // keys() */
 
-  public String[] keyNames(){
+
+  /*
+   * Gives an array of all the key names
+   */
+  public String[] keyNames() {
     String result[] = new String[this.pairs.length];
     int j = 0;
 
-    for(int i = 0; i < this.pairs.length; i++) { 
-      if (this.pairs[i] == null || this.pairs[i].key == null || this.pairs[i].value == null) {
-        continue;
-      } else { 
-        result[j] = this.pairs[i].key.toString();
+    for (int i = 0; i < this.pairs.length; i++) {
+      if (this.pairs[i] != null) {
+        result[j] = this.pairs[i].kToString();
         j++;
+      } else {
+        continue;
       }
     }
-    
+
     return result;
-  }
+  } // keyNames()
 
   // +-----------------+---------------------------------------------
   // | Private Methods |

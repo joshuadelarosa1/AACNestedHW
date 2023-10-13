@@ -26,8 +26,12 @@ public class AACCategory {
    */
   public AACCategory(String name) {
     this.name = name;
-    AA = new AssociativeArray<String, String>();
+    this.AA = new AssociativeArray<String, String>();
   } // AACAtegory(String, AssociativeArray<String, String>)
+
+  public AACCategory() {
+    this.AA = new AssociativeArray<String, String>();
+  }
 
   // +------------------+--------------------------------------------
   // | Standard Methods |
@@ -37,7 +41,7 @@ public class AACCategory {
    * Adds the mapping of the imageLoc to the text to the category
    */
   public void addItem(String imageLoc, String text) {
-    AA.set(imageLoc, text);
+    this.AA.set(imageLoc, text);
   } // addItem(String, String)
 
   /*
@@ -54,7 +58,7 @@ public class AACCategory {
     String result;
 
     try {
-      result = AA.get(imageLoc);
+      result = this.AA.get(imageLoc);
     } catch (Exception e) {
       throw new Exception("This value was not found. Please try again.");
     }
@@ -66,17 +70,38 @@ public class AACCategory {
    * Determines if the provided images is stored in the category
    */
   public boolean hasImage(String imageLoc) {
-    return AA.hasKey(imageLoc);
+    return this.AA.hasKey(imageLoc);
   } // hasImage(String imageLoc)
 
   /*
    * Returns an array of all image locations
    */
   public String[] getImages() {
-    String result[];
-    result = AA.keyNames();
+    String resultTemp[] = new String[this.AA.size()];
+    String result[] = new String[this.AA.size()];
+    int j = 0;
+    resultTemp = this.AA.keyNames();
+
+    for (int i = 0; i < resultTemp.length; i++) {
+      if (resultTemp[i] == null) {
+        System.out.println("I AM HERE");
+        continue;
+      } else {
+        if (!resultTemp[i].equals("null")) {
+          result[j] = resultTemp[i];
+          j++;
+        } else {
+          continue;
+        }
+      }
+    }
+
+    for (int k = 0; k < result.length; k++) {
+      System.out.println("result: " + result[k]);
+    }
 
     return result;
   } // getImages()
 
-} // class AACCategory
+}
+// class AACCategory

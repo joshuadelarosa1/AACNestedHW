@@ -1,4 +1,5 @@
 import structures.AssociativeArray;
+import structures.KeyNotFoundException;
 
 public class AACMappings {
 
@@ -22,7 +23,7 @@ public class AACMappings {
   AACCategory currentCategory;
 
   /*
-   * Associative array of strings and categories
+   * Associative array of strings (of category names) and categories
    */
   AssociativeArray<String, AACCategory> categories;
 
@@ -35,9 +36,12 @@ public class AACMappings {
    */
   public AACMappings(String filename) {
     this.filename = filename;
-    categories = new AssociativeArray<String, AACCategory>();
-    topLevelCategory = new AACCategory(filename);
-    currentCategory = new AACCategory(filename);
+    this.categories = new AssociativeArray<String, AACCategory>();
+    this.topLevelCategory = new AACCategory("topLevelCategory");
+    this.currentCategory = new AACCategory("currentCategory");
+
+    this.categories.set("topLevelCategory", this.topLevelCategory);
+    this.categories.set("currentCategory", this.currentCategory);
   } // AACMappings(String fileName)
 
   // +------------------+--------------------------------------------
@@ -49,13 +53,18 @@ public class AACMappings {
    * image provided is a category, it also updates the AAC's current category to be the category
    * associated with that image
    */
-  public String getText(String imageLoc) throws Exception {
+  public String getText(String imageLoc) {
     String result = "";
 
     try {
-      result = topLevelCategory.getText(imageLoc);
+      result = this.currentCategory.getText(imageLoc);
+
+      if (isCategory(result)) {
+        this.currentCategory = this.categories.get(result);
+        this.categories.set("currentCategory", this.currentCategory);
+      }
     } catch (Exception e) {
-      throw new Exception("This value was not found. Please try again.");
+      e.printStackTrace();
     }
 
     return result;
@@ -65,30 +74,42 @@ public class AACMappings {
    * Provides an array of all the images in the current category
    */
   public String[] getImageLocs() {
-    return new String[] {"img/food/icons8-french-fries-96.png",
-        "img/food/icons8-watermelon-96.png"};
+    String result[];
+    result = this.currentCategory.getImages();
+
+    return result;
   } // getImageLocs()
 
   /*
    * Resets the current category of the AAC back to the default category
    */
   public void reset() {
-    // STUB
+    this.categories.set("currentCategory", this.topLevelCategory);
   } // reset()
 
   /*
-   * Gets the current category
+   * Returns the current category or the empty string if on the default category
    */
   public String getCurrentCategory() {
-    return topLevelCategory.name;
+    if (currentCategory.equals(topLevelCategory))
+      return "";
+    else
+      return currentCategory.name;
   } // getCurrentCategory()
 
   /*
    * Determines if the image represents a category or text to speak
    */
   public boolean isCategory(String imageLoc) {
-    return true; // STUB
-  } // isCategory(String imageLoc)
+    String temp[] = this.topLevelCategory.getImages();
+
+    for (int i = 0; i < temp.length; i++) {
+      if (temp[i].equals(imageLoc))
+        return true;
+    }
+
+    return false;
+  }
 
   /*
    * Writes AACMappings to a file
@@ -102,7 +123,19 @@ public class AACMappings {
    * category)
    */
   public void add(String imageLoc, String text) {
-    // STUB
+    try {
+      this.categories.get("currentCategory").addItem(imageLoc, text);
+    } catch (KeyNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    if(isCategory(imageLoc)) { 
+      try {
+        this.categories.get("topLevelCategory").addItem(imageLoc, text);
+      } catch (KeyNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
   } // add(String imageLoc, String text)
 
 } // class AACMappings

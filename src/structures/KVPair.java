@@ -49,5 +49,9 @@ class KVPair<K,V> {
   public String toString() {
     return "{ " + this.key.toString() + " : " + this.value.toString() + " }";
   } // toString()
+
+  public String kToString() { 
+    return this.key.toString();
+  }
 } // class KVPair
 
