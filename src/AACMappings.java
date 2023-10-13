@@ -1,4 +1,5 @@
 import structures.AssociativeArray;
+
 public class AACMappings {
 
   // +--------+------------------------------------------------------
@@ -8,7 +9,22 @@ public class AACMappings {
   /*
    * the name of the file
    */
-  String fileName;
+  String filename;
+
+  /*
+   * The top level of all the categories
+   */
+  AACCategory topLevelCategory;
+
+  /*
+   * The current level/category
+   */
+  AACCategory currentCategory;
+
+  /*
+   * Associative array of strings and categories
+   */
+  AssociativeArray<String, AACCategory> categories;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -17,8 +33,11 @@ public class AACMappings {
   /*
    * Creates a new mappings with filename
    */
-  public AACMappings(String fileName) {
-    this.fileName = fileName; // STUB
+  public AACMappings(String filename) {
+    this.filename = filename;
+    categories = new AssociativeArray<String, AACCategory>();
+    topLevelCategory = new AACCategory(filename);
+    currentCategory = new AACCategory(filename);
   } // AACMappings(String fileName)
 
   // +------------------+--------------------------------------------
@@ -30,16 +49,24 @@ public class AACMappings {
    * image provided is a category, it also updates the AAC's current category to be the category
    * associated with that image
    */
-  public String getText(String actionCommand) {
-    return "french fries"; // STUB
-  } // getText(String actionCommand)
+  public String getText(String imageLoc) throws Exception {
+    String result = "";
+
+    try {
+      result = topLevelCategory.getText(imageLoc);
+    } catch (Exception e) {
+      throw new Exception("This value was not found. Please try again.");
+    }
+
+    return result;
+  } // getText(String imageLoc)
 
   /*
    * Provides an array of all the images in the current category
    */
   public String[] getImageLocs() {
     return new String[] {"img/food/icons8-french-fries-96.png",
-        "img/food/icons8-watermelon-96.png"}; // STUB
+        "img/food/icons8-watermelon-96.png"};
   } // getImageLocs()
 
   /*
@@ -53,7 +80,7 @@ public class AACMappings {
    * Gets the current category
    */
   public String getCurrentCategory() {
-    return "food"; // STUB
+    return topLevelCategory.name;
   } // getCurrentCategory()
 
   /*

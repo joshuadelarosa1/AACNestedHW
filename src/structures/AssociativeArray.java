@@ -189,7 +189,7 @@ public class AssociativeArray<K, V> {
 
   /*
    * Gets all the keys of a given associative array
-   */
+   
   @SuppressWarnings({"unchecked"})
   public K[] keys() {
     K allKs[] = (K[]) newInstance(((new KVPair<K, V>()).key).getClass(), DEFAULT_CAPACITY);
@@ -205,7 +205,23 @@ public class AssociativeArray<K, V> {
     }
 
     return allKs;
-  } // keys()
+  } // keys() */
+
+  public String[] keyNames(){
+    String result[] = new String[this.pairs.length];
+    int j = 0;
+
+    for(int i = 0; i < this.pairs.length; i++) { 
+      if (this.pairs[i] == null || this.pairs[i].key == null || this.pairs[i].value == null) {
+        continue;
+      } else { 
+        result[j] = this.pairs[i].key.toString();
+        j++;
+      }
+    }
+    
+    return result;
+  }
 
   // +-----------------+---------------------------------------------
   // | Private Methods |

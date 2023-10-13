@@ -8,7 +8,7 @@ public class AACCategory {
   // +--------+
 
   /**
-   * The associative array of catgeories and associative arrays
+   * The associative array of strings (locs) and strings (text)
    */
   AssociativeArray<String, String> AA;
 
@@ -24,9 +24,9 @@ public class AACCategory {
   /*
    * Creates a new empty category with the given name
    */
-  public AACCategory(String name, AssociativeArray<String, String> AA) {
-    this.AA = AA;
+  public AACCategory(String name) {
     this.name = name;
+    AA = new AssociativeArray<String, String>();
   } // AACAtegory(String, AssociativeArray<String, String>)
 
   // +------------------+--------------------------------------------
@@ -37,15 +37,14 @@ public class AACCategory {
    * Adds the mapping of the imageLoc to the text to the category
    */
   public void addItem(String imageLoc, String text) {
-    this.AA.set(imageLoc, text);
+    AA.set(imageLoc, text);
   } // addItem(String, String)
 
   /*
    * Returns the name of the category
    */
   public String getCategory() {
-
-    return "";
+    return this.name;
   } // getCategory()
 
   /*
@@ -55,7 +54,7 @@ public class AACCategory {
     String result;
 
     try {
-      result = this.AA.get(imageLoc);
+      result = AA.get(imageLoc);
     } catch (Exception e) {
       throw new Exception("This value was not found. Please try again.");
     }
@@ -67,7 +66,7 @@ public class AACCategory {
    * Determines if the provided images is stored in the category
    */
   public boolean hasImage(String imageLoc) {
-    return this.AA.hasKey(imageLoc);
+    return AA.hasKey(imageLoc);
   } // hasImage(String imageLoc)
 
   /*
@@ -75,7 +74,7 @@ public class AACCategory {
    */
   public String[] getImages() {
     String result[];
-    result = this.AA.keys();
+    result = AA.keyNames();
 
     return result;
   } // getImages()
