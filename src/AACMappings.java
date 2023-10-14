@@ -41,7 +41,7 @@ public class AACMappings {
     this.currentCategory = new AACCategory("currentCategory");
 
     this.categories.set("topLevelCategory", this.topLevelCategory);
-    this.categories.set("currentCategory", this.currentCategory);
+    this.categories.set("currentCategory", this.topLevelCategory);
   } // AACMappings(String fileName)
 
   // +------------------+--------------------------------------------
