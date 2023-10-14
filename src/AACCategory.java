@@ -92,12 +92,9 @@ public class AACCategory {
       }
     }
 
-    for (int k = 0; k < result.length; k++) {
-      System.out.println("result: " + result[k]);
-    }
-
     return result;
   } // getImages()
+
 
 }
 // class AACCategory

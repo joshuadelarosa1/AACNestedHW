@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import structures.AssociativeArray;
 import structures.KeyNotFoundException;
 
@@ -123,8 +126,25 @@ public class AACMappings {
    * Writes AACMappings to a file
    */
   public void writeToFile(String fileName) {
-    // STUB
-  } // writeToFile(String fileName)
+    try {
+      PrintWriter pen = new PrintWriter(new File(filename));
+      String categoryNames[] = this.categories.get("topLevelCategory").getImages();
+      for (String currentCN : categoryNames) {
+        pen.println(currentCN + " " + this.categories.get("topLevelCategory").getText(currentCN));
+
+        for(String loc : this.categories.get(currentCN).getImages()) {
+          pen.println(">" + loc + " " + this.categories.get(currentCN).getText(loc));
+        }
+      }
+
+      pen.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  // writeToFile(String fileName)
 
   /*
    * Adds the mapping to the current category (or the default category if that is the current
@@ -135,7 +155,6 @@ public class AACMappings {
       try {
         this.categories.set(imageLoc, new AACCategory(text));
         this.categories.get("topLevelCategory").addItem(imageLoc, text);
-        System.out.println("top " + this.categories.get("topLevelCategory").name);
       } catch (KeyNotFoundException e) {
         e.printStackTrace();
       }
