@@ -189,27 +189,6 @@ public class AssociativeArray<K, V> {
   } // size()
 
   /*
-   * Gets all the keys of a given associative array
-   
-  @SuppressWarnings({"unchecked"})
-  public K[] keys() {
-    int j = 0;
-    K allKs[] = (K[]) newInstance(((this.pairs[0]).key).getClass(), this.pairs.length);  
-
-    for (int k = 0; k < this.pairs.length; k++) {
-      if (this.pairs[k] == null || this.pairs[k].key == null || this.pairs[k].value == null) {
-        continue;
-      } else {
-        allKs[j] = this.pairs[k].key;
-        j++;
-      }
-    }
-
-    return allKs;
-  } // keys() */
-
-
-  /*
    * Gives an array of all the key names
    */
   public String[] keyNames() {
