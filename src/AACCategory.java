@@ -29,9 +29,6 @@ public class AACCategory {
     this.AA = new AssociativeArray<String, String>();
   } // AACAtegory(String, AssociativeArray<String, String>)
 
-  public AACCategory() {
-    this.AA = new AssociativeArray<String, String>();
-  }
 
   // +------------------+--------------------------------------------
   // | Standard Methods |
@@ -84,7 +81,6 @@ public class AACCategory {
 
     for (int i = 0; i < resultTemp.length; i++) {
       if (resultTemp[i] == null) {
-        System.out.println("I AM HERE");
         continue;
       } else {
         if (!resultTemp[i].equals("null")) {

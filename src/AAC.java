@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import structures.KeyNotFoundException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -15,6 +16,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import javax.speech.Central;
+import javax.speech.EngineStateError;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
@@ -184,21 +186,29 @@ public class AAC implements ActionListener {
       this.startIndex = 0;
       this.endIndex = Math.min(NUM_ACROSS * NUM_DOWN, this.images.length);
     } else {
-      if (this.aacMappings.getCurrentCategory().equals("")) {
-          this.aacMappings.getText(actionCommand);
+      try {
+        if (this.aacMappings.getCurrentCategory().equals("")) {
+            this.aacMappings.getText(actionCommand);
 
-        this.images = this.aacMappings.getImageLocs();
-        this.startIndex = 0;
-        this.endIndex = Math.min(NUM_ACROSS * NUM_DOWN, this.images.length);
-      } else {
-        try {
-          String toSpeak = this.aacMappings.getText(actionCommand);
-          System.out.println("Spoke: " + toSpeak);
-          synthesizer.speakPlainText(toSpeak, null);
-          synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
-        } catch (Exception e1) {
-          e1.printStackTrace();
+          this.images = this.aacMappings.getImageLocs();
+          this.startIndex = 0;
+          this.endIndex = Math.min(NUM_ACROSS * NUM_DOWN, this.images.length);
+        } else {
+          try {
+            String toSpeak = this.aacMappings.getText(actionCommand);
+            System.out.println("Spoke: " + toSpeak);
+            synthesizer.speakPlainText(toSpeak, null);
+            synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+          } catch (Exception e1) {
+            e1.printStackTrace();
+          }
         }
+      } catch (EngineStateError e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      } catch (KeyNotFoundException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
       }
     }
     loadImages(NUM_ACROSS, NUM_DOWN);
