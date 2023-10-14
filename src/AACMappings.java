@@ -57,13 +57,21 @@ public class AACMappings {
     String result = "";
 
     try {
-      if (isCategory(imageLoc)) {
-        result = (this.categories.get("topLevelCategory")).getText(imageLoc);
-        this.categories.set("currentCategory", this.categories.get(imageLoc));
-      } else {
-        result = (this.categories.get("currentCategory")).getText(imageLoc);
-      }
+      result = this.categories.get("currentCategory").getText(imageLoc);
+    } catch (KeyNotFoundException e) {
+      e.printStackTrace();
     } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    try {
+      String topKeys[] = this.categories.get("topLevelCategory").getImages();
+      for (int i = 0; i < topKeys.length; i++) {
+        if (imageLoc.equals(topKeys[i])) {
+          this.categories.set("currentCategory", this.categories.get(imageLoc));
+        }
+      }
+    } catch (KeyNotFoundException e) {
       e.printStackTrace();
     }
 
@@ -125,16 +133,16 @@ public class AACMappings {
   public void add(String imageLoc, String text) {
     if (isCategory(imageLoc)) {
       try {
-        this.categories.set(imageLoc, new AACCategory(imageLoc));
+        this.categories.set(imageLoc, new AACCategory(text));
         this.categories.get("topLevelCategory").addItem(imageLoc, text);
-        System.out.println("top level");
+        System.out.println("top " + this.categories.get("topLevelCategory").name);
       } catch (KeyNotFoundException e) {
         e.printStackTrace();
       }
     } else {
       try {
-        this.categories.get("currentCategory").addItem(imageLoc, text);
-        System.out.println("bottom level");
+        this.categories.get("currentCategory").addItem(imageLoc.substring(1, imageLoc.length()),
+            text);
       } catch (KeyNotFoundException e) {
         e.printStackTrace();
       }

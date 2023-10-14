@@ -52,6 +52,6 @@ class KVPair<K,V> {
 
   public String kToString() { 
     return this.key.toString();
-  }
+  } // kToString()
 } // class KVPair
 
