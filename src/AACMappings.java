@@ -3,7 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import structures.AssociativeArray;
 import structures.KeyNotFoundException;
-
+/**
+ * Mappings of images to items & categories
+ * 
+ * @author Joshua Delarosa
+ * 
+ */
 public class AACMappings {
 
   // +--------+------------------------------------------------------

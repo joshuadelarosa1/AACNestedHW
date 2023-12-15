@@ -1,6 +1,11 @@
 import java.lang.String;
 import structures.AssociativeArray;
-
+/**
+ * An associative array of categories and images.
+ * 
+ * @author Joshua Delarosa
+ * 
+ */
 public class AACCategory {
 
   // +--------+------------------------------------------------------
